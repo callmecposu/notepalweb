@@ -3,6 +3,7 @@
     <!-- navbar -->
     <nav class="navbar navbar-expand-md bg-light">
       <div class="container-xxl">
+        <!-- logo & website name -->
         <a href="#intro" class="navbar-brand">
           <img class="mx-2" src="../assets/logo.png" width="50" alt="logo" />
           <span class="lead fw-bold">NotePal</span>
@@ -16,26 +17,33 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+        <!-- actual navbar (links) -->
         <div
           class="collapse navbar-collapse justify-content-end align-center"
           id="main-nav"
         >
           <ul class="navbar-nav">
+            <!-- top border for mobile navs -->
             <li class="nav-item d-block d-md-none">
               <div class="container-fluid border-top border-5"></div>
             </li>
+            <!-- 'about' link, appears on both mobile & desktop navs -->
             <li class="nav-item mx-3">
               <a href="#" class="nav-link">About</a>
             </li>
+            <!-- login btn for desktop navs -->
             <li class="nav-item mx-3 d-none d-md-block">
               <a href="#" class="btn btn-outline-primary">Login</a>
             </li>
+            <!-- login link for mobile navs -->
             <li class="nav-item d-block d-md-none">
               <a href="#" class="nav-link link-primary">Login</a>
             </li>
+            <!-- sign up btn for desktop navs -->
             <li class="nav-item mx-3 d-none d-md-block">
               <a href="#" class="btn btn-success">Sign Up</a>
             </li>
+            <!-- sign up link for mobile navs -->
             <li class="nav-item d-block d-md-none">
               <a href="#" class="nav-link link-success">Sign Up</a>
             </li>
