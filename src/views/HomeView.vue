@@ -33,13 +33,15 @@
             </li>
             <!-- login btn for desktop navs -->
             <li class="nav-item mx-3 d-none d-md-block">
-              <router-link to="/login" href="#" class="btn btn-outline-primary"
+              <router-link to="/login" class="btn btn-outline-primary"
                 >Login</router-link
               >
             </li>
             <!-- login link for mobile navs -->
             <li class="nav-item d-block d-md-none">
-              <a href="#" class="nav-link link-primary">Login</a>
+              <router-link to="/login" class="nav-link link-primary"
+                >Login</router-link
+              >
             </li>
             <!-- sign up btn for desktop navs -->
             <li class="nav-item mx-3 d-none d-md-block">
@@ -48,6 +50,10 @@
             <!-- sign up link for mobile navs -->
             <li class="nav-item d-block d-md-none">
               <a href="#" class="nav-link link-success">Sign Up</a>
+            </li>
+            <!-- bottom border for mobile navs -->
+            <li class="nav-item d-block d-md-none">
+              <div class="container-fluid border-bottom border-5"></div>
             </li>
           </ul>
         </div>
@@ -62,7 +68,7 @@
         <div class="row justify-content-center align-items-center">
           <div class="col-md-5 text-center text-md-start">
             <h1>
-              <div class="display-3 border-bottom border-5 rounded">
+              <div class="display-4 border-bottom border-5 rounded">
                 Your personal Note Pal
               </div>
               <div class="display-6 text-muted mt-2">As if you needed one</div>
@@ -85,9 +91,7 @@
         <!-- container with heading-->
         <div class="container mb-5 mt-2">
           <h1 class="display-6">A Web App to store your dearest notes</h1>
-          <h5 class="text-muted">
-            And share your less precious ones
-          </h5>
+          <h5 class="text-muted">And share your less precious ones</h5>
         </div>
         <!-- container with the carousel -->
         <div class="container-lg">
