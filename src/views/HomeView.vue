@@ -81,7 +81,7 @@
 
     <!-- about section -->
     <section id="about">
-      <div class="container-fluid bg-light p-5">
+      <div class="container-fluid bg-light pt-3">
         <!-- container with heading-->
         <div class="container mb-5">
           <h1 class="display-3">Still haven't tried it out?</h1>
@@ -90,7 +90,7 @@
           </p>
         </div>
         <!-- container with the carousel -->
-        <div class="container">
+        <div class="container-lg">
           <div id="carouselExampleIndicators" class="carousel slide">
             <!-- carousel slot indicators -->
             <div class="carousel-indicators">
@@ -140,7 +140,7 @@
                 <div
                   class="carousel-caption justify-content-center align-items-center d-flex h-100"
                 >
-                  <h1 class="display-4">
+                  <h1 class="display-5">
                     All your notes in one place, available from any device.
                   </h1>
                 </div>
@@ -155,7 +155,7 @@
                 <div
                   class="carousel-caption justify-content-center align-items-center d-flex h-100"
                 >
-                  <h1 class="display-4">
+                  <h1 class="display-5">
                     Share your thoughts securely. We protect you from outsiders.
                   </h1>
                 </div>
