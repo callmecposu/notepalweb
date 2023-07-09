@@ -33,7 +33,7 @@
             </li>
             <!-- login btn for desktop navs -->
             <li class="nav-item mx-3 d-none d-md-block">
-              <a href="#" class="btn btn-outline-primary">Login</a>
+              <router-link to="/login" href="#" class="btn btn-outline-primary">Login</router-link>
             </li>
             <!-- login link for mobile navs -->
             <li class="nav-item d-block d-md-none">
