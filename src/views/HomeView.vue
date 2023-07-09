@@ -57,12 +57,12 @@
     <section id="pagetop"></section>
 
     <!-- intro section -->
-    <section id="intro" class="mt-3">
+    <section id="intro">
       <div class="container-lg">
         <div class="row justify-content-center align-items-center">
           <div class="col-md-5 text-center text-md-start">
             <h1>
-              <div class="display-2 border-bottom border-5 rounded">
+              <div class="display-3 border-bottom border-5 rounded">
                 Your personal Note Pal
               </div>
               <div class="display-6 text-muted mt-2">As if you needed one</div>
@@ -83,11 +83,11 @@
     <section id="about">
       <div class="container-fluid bg-light pt-3">
         <!-- container with heading-->
-        <div class="container mb-5">
-          <h1 class="display-3">Still haven't tried it out?</h1>
-          <p class="display-6 text-muted">
-            No worries, we aren't going anywhere.
-          </p>
+        <div class="container mb-5 mt-2">
+          <h1 class="display-6">A Web App to store your dearest notes</h1>
+          <h5 class="text-muted">
+            And share your less precious ones
+          </h5>
         </div>
         <!-- container with the carousel -->
         <div class="container-lg">
@@ -201,6 +201,6 @@ export default {
 
 <style scoped>
 section {
-  padding: 60px 0;
+  padding: 40px 0;
 }
 </style>
