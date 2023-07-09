@@ -1,10 +1,10 @@
 <template>
   <div class="home">
     <!-- navbar -->
-    <nav class="navbar navbar-expand-md bg-light">
+    <nav class="navbar fixed-top navbar-expand-md bg-light">
       <div class="container-xxl">
         <!-- logo & website name -->
-        <a href="#intro" class="navbar-brand">
+        <a href="#pagetop" class="navbar-brand">
           <img class="mx-2" src="../assets/logo.png" width="50" alt="logo" />
           <span class="lead fw-bold">NotePal</span>
         </a>
@@ -29,11 +29,13 @@
             </li>
             <!-- 'about' link, appears on both mobile & desktop navs -->
             <li class="nav-item mx-3">
-              <a href="#" class="nav-link">About</a>
+              <a href="#about" class="nav-link">About</a>
             </li>
             <!-- login btn for desktop navs -->
             <li class="nav-item mx-3 d-none d-md-block">
-              <router-link to="/login" href="#" class="btn btn-outline-primary">Login</router-link>
+              <router-link to="/login" href="#" class="btn btn-outline-primary"
+                >Login</router-link
+              >
             </li>
             <!-- login link for mobile navs -->
             <li class="nav-item d-block d-md-none">
@@ -52,8 +54,10 @@
       </div>
     </nav>
 
+    <section id="pagetop"></section>
+
     <!-- intro section -->
-    <section id="intro">
+    <section id="intro" class="mt-3">
       <div class="container-lg">
         <div class="row justify-content-center align-items-center">
           <div class="col-md-5 text-center text-md-start">
@@ -70,6 +74,118 @@
               src="../assets/notes.png"
               alt="blank notes"
             />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- about section -->
+    <section id="about">
+      <div class="container-fluid bg-light p-5">
+        <!-- container with heading-->
+        <div class="container mb-5">
+          <h1 class="display-3">Still haven't tried it out?</h1>
+          <p class="display-6 text-muted">
+            No worries, we aren't going anywhere.
+          </p>
+        </div>
+        <!-- container with the carousel -->
+        <div class="container">
+          <div id="carouselExampleIndicators" class="carousel slide">
+            <!-- carousel slot indicators -->
+            <div class="carousel-indicators">
+              <button
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="0"
+                class="active"
+                aria-current="true"
+                aria-label="Slide 1"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="1"
+                aria-label="Slide 2"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="2"
+                aria-label="Slide 3"
+              ></button>
+            </div>
+            <!-- carousel elements -->
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img
+                  src="../assets/taking-notes.jpg"
+                  class="d-block w-100"
+                  alt="..."
+                  style="filter: brightness(50%)"
+                />
+                <div
+                  class="carousel-caption justify-content-center align-items-center d-flex h-100"
+                >
+                  <h1 class="display-4">You don't need those anymore.</h1>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="../assets/gadgets.jpg"
+                  class="d-block w-100"
+                  alt="..."
+                  style="filter: brightness(30%)"
+                />
+                <div
+                  class="carousel-caption justify-content-center align-items-center d-flex h-100"
+                >
+                  <h1 class="display-4">
+                    All your notes in one place, available from any device.
+                  </h1>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="../assets/friendship.jpg"
+                  class="d-block w-100"
+                  alt="..."
+                  style="filter: brightness(50%)"
+                />
+                <div
+                  class="carousel-caption justify-content-center align-items-center d-flex h-100"
+                >
+                  <h1 class="display-4">
+                    Share your thoughts securely. We protect you from outsiders.
+                  </h1>
+                </div>
+              </div>
+            </div>
+            <!-- carousel control buttons -->
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
           </div>
         </div>
       </div>
