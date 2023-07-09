@@ -140,7 +140,7 @@
                 <div
                   class="carousel-caption justify-content-center align-items-center d-flex h-100"
                 >
-                  <h1 class="display-5">
+                  <h1 class="display-6">
                     All your notes in one place, available from any device.
                   </h1>
                 </div>
@@ -155,7 +155,7 @@
                 <div
                   class="carousel-caption justify-content-center align-items-center d-flex h-100"
                 >
-                  <h1 class="display-5">
+                  <h1 class="display-6">
                     Share your thoughts securely. We protect you from outsiders.
                   </h1>
                 </div>
