@@ -74,12 +74,27 @@
               <div class="display-6 text-muted mt-2">As if you needed one</div>
             </h1>
           </div>
-          <div class="col-md-5 text-center m-3">
+          <!-- this div is displayed only on desktops -->
+          <div class="col-md-5 d-none d-md-block text-center m-3">
             <img
               class="img-fluid"
               src="../assets/notes.png"
               alt="blank notes"
             />
+          </div>
+        </div>
+        <!-- this div is displayed only on mobiles -->
+        <div class="container-lg mt-3">
+          <div
+            class="row d-flex d-md-none justify-content-center align-items-center"
+          >
+            <div class="col-4 text-start m-3">
+              <router-link to="/login" class="btn btn-outline-primary mb-2">Login</router-link>
+              <a href="#" class="btn btn-success">Sign Up</a>
+            </div>
+            <div class="col-6">
+              <img src="../assets/notes.png" alt="blank notes" class="w-100" />
+            </div>
           </div>
         </div>
       </div>
