@@ -45,11 +45,11 @@
             </li>
             <!-- sign up btn for desktop navs -->
             <li class="nav-item mx-3 d-none d-md-block">
-              <a href="#" class="btn btn-success">Sign Up</a>
+              <router-link to="/signup" class="btn btn-success">Sign Up</router-link>
             </li>
             <!-- sign up link for mobile navs -->
             <li class="nav-item d-block d-md-none">
-              <a href="#" class="nav-link link-success">Sign Up</a>
+              <router-link to="/signup" class="nav-link link-success">Sign Up</router-link>
             </li>
             <!-- bottom border for mobile navs -->
             <li class="nav-item d-block d-md-none">
@@ -90,7 +90,7 @@
           >
             <div class="col-4 text-start m-3">
               <router-link to="/login" class="btn btn-outline-primary mb-2">Login</router-link>
-              <a href="#" class="btn btn-success">Sign Up</a>
+              <router-link to="/signup" class="btn btn-success">Sign Up</router-link>
             </div>
             <div class="col-6">
               <img src="../assets/notes.png" alt="blank notes" class="w-100" />
