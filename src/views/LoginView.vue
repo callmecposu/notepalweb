@@ -1,10 +1,15 @@
 <template>
-  <h1>it's supposed to be  a login view</h1>
+  <LoginForm/>
 </template>
 
 <script>
+import LoginForm from '../components/LoginForm.vue'
+
 export default {
-    name: "LoginView"
+    name: "LoginView",
+    components: {
+        LoginForm
+    }
 }
 </script>
 

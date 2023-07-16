@@ -2,7 +2,7 @@
   <div class="d-flex align-items-center" style="height: 95vh">
     <div class="container col-lg-6 col-10 p-5 rounded-4 border border-3">
       <div class="lead fw-bold">NotePal</div>
-      <div class="mute mb-3">Get Started with us today!</div>
+      <div class="mute mb-3">Glad to see you again!</div>
       <div class="form-floating mb-3">
         <input
           v-model="username"
@@ -23,17 +23,7 @@
         />
         <label for="password">Password</label>
       </div>
-      <div class="form-floating">
-        <input
-          v-model="confPassword"
-          type="password"
-          class="form-control"
-          id="confPassword"
-          placeholder="Confirm Password"
-        />
-        <label for="confPassword">Confirm Password</label>
-      </div>
-      <button class="btn btn-success mt-3">Sign Up</button>
+      <button class="btn btn-success mt-3">Log In</button>
     </div>
   </div>
 </template>
@@ -43,8 +33,7 @@ export default {
   data() {
     return {
       username: "",
-      password: "",
-      confPassword: "",
+      password: ""
     };
   },
 };
