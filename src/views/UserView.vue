@@ -18,7 +18,7 @@ export default {
             body: JSON.stringify({token: jwt})
         })
         const result = await res.json();
-        if (res.status != 200){
+        if (res.status != 200 || result.user.username != this.$route.params.username){
             router.push({name: 'login'})
         }
         console.log(result);

@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import router from '@/router';
+import router from "@/router";
 export default {
   data() {
     return {
@@ -50,11 +50,32 @@ export default {
       });
       const result = await res.json();
       console.log(result);
-      if(res.status == 200){
-        router.push({name:'user', params:{username: result.user.username} })
-        this.$cookies.set('jwt', result.token, 3*24*60*60);
+      if (res.status == 200) {
+        router.push({
+          name: "user",
+          params: { username: result.user.username },
+        });
+        this.$cookies.set("jwt", result.token, 3 * 24 * 60 * 60);
       }
     },
+  },
+  async mounted() {
+    const jwt = this.$cookies.get("jwt");
+    if (jwt != null) {
+      const res = await fetch("http://localhost:8888/api/get_user_by_jwt", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        mode: "cors",
+        body: JSON.stringify({ token: jwt }),
+      });
+      const result = await res.json();
+      if (res.status == 200) {
+        router.push({
+          name: "user",
+          params: { username: result.user.username },
+        });
+      }
+    }
   },
 };
 </script>
