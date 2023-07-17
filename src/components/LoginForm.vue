@@ -23,7 +23,7 @@
         />
         <label for="password">Password</label>
       </div>
-      <button class="btn btn-success mt-3">Log In</button>
+      <button @click="submit" class="btn btn-success mt-3">Log In</button>
     </div>
   </div>
 </template>
@@ -33,8 +33,23 @@ export default {
   data() {
     return {
       username: "",
-      password: ""
+      password: "",
     };
+  },
+  methods: {
+    async submit() {
+      const res = await fetch("http://localhost:8888/api/login_user", {
+        method: "POST",
+        mode: "cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: this.username,
+          password: this.password,
+        }),
+      });
+      const result = await res.json();
+      console.log(result);
+    },
   },
 };
 </script>
