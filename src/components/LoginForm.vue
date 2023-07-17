@@ -52,6 +52,7 @@ export default {
       console.log(result);
       if(res.status == 200){
         router.push({name:'user', params:{username: result.user.username} })
+        this.$cookies.set('jwt', result.token, 3*24*60*60);
       }
     },
   },

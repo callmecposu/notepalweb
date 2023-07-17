@@ -4,19 +4,24 @@
 </template>
 
 <script>
+import router from '@/router';
 export default {
     name:'UserView',
     async mounted(){
-        console.log(this.jwt);
-        // const res = await fetch('http://localhost:8888/api/get_user_by_jwt',
-        // {
-        //     method:'POST',
-        //     headers: {'Content-Type': 'application/json'},
-        //     mode: 'cors',
-        //     body: JSON.stringify({token: this.jwt})
-        // })
-        // const result = await res.json();
-        // console.log(result);
+        const jwt = this.$cookies.get('jwt');
+
+        const res = await fetch('http://localhost:8888/api/get_user_by_jwt',
+        {
+            method:'POST',
+            headers: {'Content-Type': 'application/json'},
+            mode: 'cors',
+            body: JSON.stringify({token: jwt})
+        })
+        const result = await res.json();
+        if (res.status != 200){
+            router.push({name: 'login'})
+        }
+        console.log(result);
     }
 }
 </script>
