@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import router from '@/router';
 export default {
   data() {
     return {
@@ -49,6 +50,9 @@ export default {
       });
       const result = await res.json();
       console.log(result);
+      if(res.status == 200){
+        router.push({name:'user', params:{username: result.user.username} })
+      }
     },
   },
 };
