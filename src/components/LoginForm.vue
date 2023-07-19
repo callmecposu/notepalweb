@@ -13,6 +13,7 @@
         />
         <label for="username">Username</label>
       </div>
+      <p class="text-danger">{{ usernameError }}</p>
       <div class="form-floating mb-3">
         <input
           v-model="password"
@@ -23,6 +24,7 @@
         />
         <label for="password">Password</label>
       </div>
+      <p class="text-danger">{{ passwordError }}</p>
       <button @click="submit" class="btn btn-success mt-3">Log In</button>
     </div>
   </div>
@@ -35,10 +37,14 @@ export default {
     return {
       username: "",
       password: "",
+      usernameError: "",
+      passwordError: "",
     };
   },
   methods: {
     async submit() {
+      this.usernameError = "";
+      this.passwordError = "";
       const res = await fetch("http://localhost:8888/api/login_user", {
         method: "POST",
         mode: "cors",
@@ -56,26 +62,14 @@ export default {
           params: { username: result.user.username },
         });
         this.$cookies.set("jwt", result.token, 3 * 24 * 60 * 60);
+      } else {
+        if (result.src == "username") {
+          this.usernameError = result.message;
+        } else if (result.src == "password") {
+          this.passwordError = result.message;
+        }
       }
     },
-  },
-  async mounted() {
-    const jwt = this.$cookies.get("jwt");
-    if (jwt != null) {
-      const res = await fetch("http://localhost:8888/api/get_user_by_jwt", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        mode: "cors",
-        body: JSON.stringify({ token: jwt }),
-      });
-      const result = await res.json();
-      if (res.status == 200) {
-        router.push({
-          name: "user",
-          params: { username: result.user.username },
-        });
-      }
-    }
   },
 };
 </script>
