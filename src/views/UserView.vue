@@ -86,22 +86,27 @@
 
   <section id="pagetop"></section>
 
-  <CreateNoteModal @createNote = "addNote"/>
+  <CreateNoteModal @createNote="addNote" />
   <ImportNoteModal />
 
   <!-- notes container -->
   <section id="notes">
     <div class="d-flex align-items-center">
       <div class="container col-lg-8 col-10 rounded-4 border border-2 p-3">
-        <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div
+          v-if="notes.length != 0"
+          class="accordion"
+          id="accordionPanelsStayOpenExample"
+        >
           <NoteAccordionItem
             v-for="note in notes"
-            :key="note.noteID"
-            :noteID="note.noteID"
+            :key="note._id"
+            :noteID="note._id"
             :title="note.title"
             :content="note.content"
           />
         </div>
+        <LoadingSpinner v-if="notes.length == 0" />
       </div>
     </div>
   </section>
@@ -114,20 +119,20 @@
 import router from "@/router";
 import CreateNoteModal from "../components/CreateNoteModal.vue";
 import NoteAccordionItem from "../components/NoteAccordionItem.vue";
-import ImportNoteModal from "@/components/ImportNoteModal.vue";
+import ImportNoteModal from "../components/ImportNoteModal.vue";
+import LoadingSpinner from "../components/LoadingSpinner.vue";
 export default {
   name: "UserView",
   components: {
     NoteAccordionItem,
     CreateNoteModal,
     ImportNoteModal,
+    LoadingSpinner,
   },
   data() {
     return {
-      notes: [
-        { noteID: 1, title: "My Note 1", content: "note 1\ncontent" },
-        { noteID: 2, title: "My Note 2", content: "note 2\ncontent" },
-      ],
+      notes: [],
+      userID: "",
     };
   },
   async mounted() {
@@ -145,14 +150,36 @@ export default {
       result.user.username != this.$route.params.username
     ) {
       router.push({ name: "login" });
+    } else {
+      this.userID = result.user._id;
+      this.refreshNotes();
     }
     console.log(result);
   },
-  methods:{
-    addNote(title){
-        this.notes.push({noteID: this.notes.length + 1, title: title, content: 'blank content'})
-    }
-  }
+  methods: {
+    async addNote(title){
+        this.notes = [];
+        const res = await fetch('http://localhost:8888/api/create_note',{
+            method:'POST',
+            headers: {'Content-Type' : 'application/json'},
+            mode: 'cors',
+            body: JSON.stringify({username: this.$route.params.username, title: title})
+        });
+        if (res.status == 200){
+            this.refreshNotes();
+        }
+    },
+    async refreshNotes() {
+      const res = await fetch("http://localhost:8888/api/get_user_notes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        mode: "cors",
+        body: JSON.stringify({ username: this.$route.params.username }),
+      });
+      const result = await res.json();
+      this.notes = result.userNotes;
+    },
+  },
 };
 </script>
 
