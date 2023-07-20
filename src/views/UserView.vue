@@ -86,7 +86,7 @@
 
   <section id="pagetop"></section>
 
-  <CreateNoteModal />
+  <CreateNoteModal @createNote = "addNote"/>
   <ImportNoteModal />
 
   <!-- notes container -->
@@ -148,6 +148,11 @@ export default {
     }
     console.log(result);
   },
+  methods:{
+    addNote(title){
+        this.notes.push({noteID: this.notes.length + 1, title: title, content: 'blank content'})
+    }
+  }
 };
 </script>
 

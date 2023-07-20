@@ -9,11 +9,11 @@
       </div>
       <div class="modal-body">
         <div class="lead mb-3">Enter the note's name</div>
-        <input class="form-control" type="text" placeholder="Note Title">
+        <input class="form-control" v-model="noteTitle" type="text" placeholder="Note Title">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Create</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" @click="submit">Create</button>
       </div>
     </div>
   </div>
@@ -22,7 +22,16 @@
 
 <script>
 export default {
-
+    data(){
+        return{
+            noteTitle:''
+        }
+    },
+    methods:{
+        submit(){
+            this.$emit('createNote', this.noteTitle);
+        }
+    }
 }
 </script>
 
