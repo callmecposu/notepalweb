@@ -10,7 +10,7 @@
       <div class="lead ms-1">{{ $route.params.username }}</div>
       <!-- toggle btn for mobiles -->
       <button
-        class="navbar-toggler"
+        class="navbar-toggler me-3"
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#main-nav"
@@ -29,19 +29,43 @@
           </li>
           <!-- create note btn for desktop navs -->
           <li class="nav-item mx-3 d-none d-md-block">
-            <div class="btn btn-success">Create Note</div>
+            <div
+              class="btn btn-success"
+              data-bs-toggle="modal"
+              data-bs-target="#createNoteModal"
+            >
+              Create Note
+            </div>
           </li>
           <!-- create note btn for mobile navs -->
           <li class="nav-item d-block d-md-none">
-            <div class="nav-link link-success">Create Note</div>
+            <div
+              class="nav-link link-success"
+              data-bs-toggle="modal"
+              data-bs-target="#createNoteModal"
+            >
+              Create Note
+            </div>
           </li>
           <!-- import note btn for desktop navs -->
           <li class="nav-item mx-3 d-none d-md-block">
-            <div class="btn btn-outline-primary">Import Note</div>
+            <div
+              class="btn btn-outline-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#importNoteModal"
+            >
+              Import Note
+            </div>
           </li>
           <!-- import note button for mobile navs -->
           <li class="nav-item d-block d-md-none">
-            <div class="nav-link link-primary">Import Note</div>
+            <div
+              class="nav-link link-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#importNoteModal"
+            >
+              Import Note
+            </div>
           </li>
           <!-- log out btn for desktop navs -->
           <li class="nav-item mx-3 d-none d-md-block">
@@ -61,6 +85,9 @@
   </nav>
 
   <section id="pagetop"></section>
+
+  <CreateNoteModal />
+  <ImportNoteModal />
 
   <!-- notes container -->
   <section id="notes">
@@ -85,11 +112,15 @@
 
 <script>
 import router from "@/router";
+import CreateNoteModal from "../components/CreateNoteModal.vue";
 import NoteAccordionItem from "../components/NoteAccordionItem.vue";
+import ImportNoteModal from "@/components/ImportNoteModal.vue";
 export default {
   name: "UserView",
   components: {
     NoteAccordionItem,
+    CreateNoteModal,
+    ImportNoteModal,
   },
   data() {
     return {
