@@ -13,7 +13,7 @@
         />
         <label for="username">Username</label>
       </div>
-      <p class="text-danger">{{ usernameError }}</p>
+      <p class="text-danger mt-1">{{ usernameError }}</p>
       <div class="form-floating mb-3">
         <input
           v-model="password"
@@ -24,7 +24,7 @@
         />
         <label for="password">Password</label>
       </div>
-      <p class="text-danger">{{ passwordError }}</p>
+      <p class="text-danger mt-1">{{ passwordError }}</p>
       <button @click="submit" class="btn btn-success mt-3">Log In</button>
     </div>
   </div>
