@@ -15,6 +15,7 @@
     <div
       :id="noteID"
       class="accordion-collapse collapse"
+      :class="{show: show}"
     >
       <div class="accordion-body">
         <div class="form">
@@ -45,7 +46,7 @@ export default {
             noteContent: this.content
         }
     },
-    props: ['noteID', 'title', 'content'],
+    props: ['noteID', 'title', 'content', 'show'],
 };
 </script>
 

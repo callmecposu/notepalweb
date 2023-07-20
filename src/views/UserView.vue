@@ -104,6 +104,7 @@
             :noteID="note._id"
             :title="note.title"
             :content="note.content"
+            :show="note.show"
           />
         </div>
         <LoadingSpinner v-if="notes.length == 0" />
@@ -178,6 +179,7 @@ export default {
       });
       const result = await res.json();
       this.notes = result.userNotes;
+      this.notes[0]['show'] = true;
     },
   },
 };
