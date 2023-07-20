@@ -2,7 +2,8 @@
   <div class="accordion-item">
     <h2 class="accordion-header">
       <button
-        class="accordion-button bg-light"
+        class="accordion-button"
+        :class="{collapsed: !show}"
         type="button"
         data-bs-toggle="collapse"
         :data-bs-target="'#' + noteID"
@@ -53,5 +54,17 @@ export default {
 <style scoped>
 .btn{
     width: 80px;
+}
+button.accordion-button{
+    background-color: rgb(227, 227, 227);
+    text-indent: 20px;
+    transition: background-color .1s ease-in-out;
+    transition: text-indent .1s ease-in-out;
+}
+button.accordion-button.collapsed{
+    text-indent: 0px;
+    background-color: whitesmoke;
+    transition: background-color .1s ease-in-out;
+    transition: text-indent .1s ease-in-out;
 }
 </style>
