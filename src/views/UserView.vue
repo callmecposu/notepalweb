@@ -67,8 +67,13 @@
     <div class="d-flex align-items-center">
       <div class="container col-lg-8 col-10 rounded-4 border border-2 p-3">
         <div class="accordion" id="accordionPanelsStayOpenExample">
-          <NoteAccordionItem/>
-          <NoteAccordionItem/>
+          <NoteAccordionItem
+            v-for="note in notes"
+            :key="note.noteID"
+            :noteID="note.noteID"
+            :title="note.title"
+            :content="note.content"
+          />
         </div>
       </div>
     </div>
@@ -80,11 +85,19 @@
 
 <script>
 import router from "@/router";
-import NoteAccordionItem from '../components/NoteAccordionItem.vue';
+import NoteAccordionItem from "../components/NoteAccordionItem.vue";
 export default {
   name: "UserView",
-  components:{
-    NoteAccordionItem
+  components: {
+    NoteAccordionItem,
+  },
+  data() {
+    return {
+      notes: [
+        { noteID: 1, title: "My Note 1", content: "note 1\ncontent" },
+        { noteID: 2, title: "My Note 2", content: "note 2\ncontent" },
+      ],
+    };
   },
   async mounted() {
     const jwt = this.$cookies.get("jwt");

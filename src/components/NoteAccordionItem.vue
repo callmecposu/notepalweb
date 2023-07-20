@@ -2,26 +2,27 @@
   <div class="accordion-item">
     <h2 class="accordion-header">
       <button
-        class="accordion-button"
+        class="accordion-button bg-light"
         type="button"
         data-bs-toggle="collapse"
-        data-bs-target="#panelsStayOpen-collapseOne"
+        :data-bs-target="'#' + noteID"
         aria-expanded="true"
-        aria-controls="panelsStayOpen-collapseOne"
+        :aria-controls="noteID"
       >
-        My Note
+       {{ title }}
       </button>
     </h2>
     <div
-      id="panelsStayOpen-collapseOne"
-      class="accordion-collapse collapse show"
+      :id="noteID"
+      class="accordion-collapse collapse"
     >
       <div class="accordion-body">
         <div class="form">
           <textarea
+          v-model="noteContent"
             class="form-control"
             placeholder="Leave a comment here"
-            id="floatingTextarea2"
+            :id="'textArea_' + noteID"
             style="height: 200px"
           ></textarea>
         </div>
@@ -38,7 +39,18 @@
 </template>
 
 <script>
-export default {};
+export default {
+    data(){
+        return{
+            noteContent: this.content
+        }
+    },
+    props: ['noteID', 'title', 'content'],
+};
 </script>
 
-<style></style>
+<style scoped>
+.btn{
+    width: 80px;
+}
+</style>
