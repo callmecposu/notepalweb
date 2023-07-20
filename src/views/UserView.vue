@@ -69,11 +69,11 @@
           </li>
           <!-- log out btn for desktop navs -->
           <li class="nav-item mx-3 d-none d-md-block">
-            <div class="btn btn-danger">Log Out</div>
+            <div class="btn btn-danger" @click="logout">Log Out</div>
           </li>
           <!-- log out btn for mobile navs -->
           <li class="nav-item mx-3 d-block d-md-none">
-            <div class="nav-link link-danger">Log Out</div>
+            <div class="nav-link link-danger" @click="logout">Log Out</div>
           </li>
           <!-- bottom border for mobile navs -->
           <li class="nav-item d-block d-md-none">
@@ -181,6 +181,10 @@ export default {
       this.notes = result.userNotes;
       this.notes[0]['show'] = true;
     },
+    logout(){
+        this.$cookies.set('jwt','', 1);
+        router.push({name: 'home'})
+    }
   },
 };
 </script>

@@ -23,7 +23,7 @@
           <textarea
           v-model="noteContent"
             class="form-control"
-            placeholder="Leave a comment here"
+            placeholder="I feel so empty..."
             :id="'textArea_' + noteID"
             style="height: 200px"
           ></textarea>
