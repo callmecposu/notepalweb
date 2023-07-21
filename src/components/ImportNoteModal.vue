@@ -20,17 +20,24 @@
         </div>
         <div class="modal-body">
           <div class="lead mb-3">Paste the Note's ID</div>
-          <input class="form-control" type="text" placeholder="Note ID" />
+          <input
+            class="form-control"
+            v-model="noteID"
+            type="text"
+            placeholder="Note ID"
+          />
+          <p class="text-danger mt-1">{{ importError }}</p>
         </div>
         <div class="modal-footer">
           <button
+            ref="closeBtn"
             type="button"
             class="btn btn-secondary"
             data-bs-dismiss="modal"
           >
             Close
           </button>
-          <button type="button" class="btn btn-primary">Import</button>
+          <button type="button" class="btn btn-primary" @click="submit">Import</button>
         </div>
       </div>
     </div>
@@ -38,7 +45,34 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      noteID: "",
+      importError: "",
+    };
+  },
+  methods: {
+    async submit() {
+      const res = await fetch("http://localhost:8888/api/import_note", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        mode: "cors",
+        body: JSON.stringify({
+          username: this.$route.params.username,
+          noteID: this.noteID,
+        }),
+      });
+      if (res.status != 200) {
+        const result = await res.json();
+        this.importError = result.message;
+      } else {
+        this.$refs.closeBtn.click();
+        this.$emit("importedNote");
+      }
+    },
+  },
+};
 </script>
 
 <style></style>

@@ -87,14 +87,14 @@
   <section id="pagetop"></section>
 
   <CreateNoteModal @createdNote="addNote" />
-  <ImportNoteModal />
+  <ImportNoteModal @importedNote="refreshNotes" />
 
   <!-- notes container -->
   <section id="notes">
     <div class="d-flex align-items-center">
       <div class="container col-lg-8 col-10 rounded-4 border border-2 p-3">
         <div
-          v-if="notes.length != 0"
+          v-if="!loadingNotes && notes.length != 0"
           class="accordion"
           id="accordionPanelsStayOpenExample"
         >
@@ -108,7 +108,8 @@
             @noteListChanged="refreshNotes"
           />
         </div>
-        <LoadingSpinner v-if="notes.length == 0" />
+        <LoadingSpinner v-if="loadingNotes" />
+        <h1 v-if="!loadingNotes && notes.length == 0" class="lead m-3">You have no Notes at the moment.</h1>
       </div>
     </div>
   </section>
@@ -135,6 +136,7 @@ export default {
     return {
       notes: [],
       userID: "",
+      loadingNotes: true,
     };
   },
   async mounted() {
@@ -159,20 +161,23 @@ export default {
     console.log(result);
   },
   methods: {
-    async addNote(title){
-        this.notes = [];
-        const res = await fetch('http://localhost:8888/api/create_note',{
-            method:'POST',
-            headers: {'Content-Type' : 'application/json'},
-            mode: 'cors',
-            body: JSON.stringify({username: this.$route.params.username, title: title})
-        });
-        if (res.status == 200){
-            this.refreshNotes();
-        }
+    async addNote(title) {
+      this.loadingNotes = true;
+      const res = await fetch("http://localhost:8888/api/create_note", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        mode: "cors",
+        body: JSON.stringify({
+          username: this.$route.params.username,
+          title: title,
+        }),
+      });
+      if (res.status == 200) {
+        this.refreshNotes();
+      }
     },
     async refreshNotes() {
-        this.notes = []
+      this.loadingNotes = true;
       const res = await fetch("http://localhost:8888/api/get_user_notes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -181,12 +186,15 @@ export default {
       });
       const result = await res.json();
       this.notes = result.userNotes;
-      this.notes[0]['show'] = true;
+      this.loadingNotes = false;
+      if (this.notes.length != 0) {
+        this.notes[0]["show"] = true;
+      }
     },
-    logout(){
-        this.$cookies.set('jwt','', 1);
-        router.push({name: 'home'})
-    }
+    logout() {
+      this.$cookies.set("jwt", "", 1);
+      router.push({ name: "home" });
+    },
   },
 };
 </script>
