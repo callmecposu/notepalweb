@@ -137,7 +137,7 @@
   <!-- notes container -->
   <section id="notes">
     <div class="d-flex align-items-center">
-      <div class="container col-lg-8 col-10 rounded-4 border border-2 p-3">
+      <div class="container col-lg-8 col-11 rounded-4 border border-2 p-3">
         <div
           v-if="!loadingNotes && notes.length != 0"
           class="accordion"

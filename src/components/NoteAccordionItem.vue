@@ -140,9 +140,9 @@ export default {
   width: 80px;
 }
 button.accordion-button {
-  font-size: 60%;
+  font-size: 55%;
   background-color: rgb(227, 227, 227);
-  text-indent: 15px;
+  text-indent: 10px;
   transition: background-color 0.1s ease-in-out;
   transition: text-indent 0.1s ease-in-out;
 }
