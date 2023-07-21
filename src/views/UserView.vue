@@ -86,7 +86,7 @@
 
   <section id="pagetop"></section>
 
-  <CreateNoteModal @createNote="addNote" />
+  <CreateNoteModal @createdNote="addNote" />
   <ImportNoteModal />
 
   <!-- notes container -->
@@ -105,6 +105,7 @@
             :title="note.title"
             :content="note.content"
             :show="note.show"
+            @noteListChanged="refreshNotes"
           />
         </div>
         <LoadingSpinner v-if="notes.length == 0" />
@@ -171,6 +172,7 @@ export default {
         }
     },
     async refreshNotes() {
+        this.notes = []
       const res = await fetch("http://localhost:8888/api/get_user_notes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

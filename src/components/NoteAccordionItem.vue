@@ -10,7 +10,7 @@
         aria-expanded="true"
         :aria-controls="noteID"
       >
-        {{ title }} {{ (changed) ? ' *' : ''}}
+        {{ title }} {{ changed ? " *" : "" }}
       </button>
     </h2>
     <div
@@ -30,10 +30,12 @@
         </div>
         <!-- note controls -->
         <div class="container mt-2 p-3">
-          <div class="btn btn-outline-success mx-2 mb-2" @click="saveNote">Save</div>
+          <div class="btn btn-outline-success mx-2 mb-2" @click="saveNote">
+            Save
+          </div>
           <div class="btn btn-outline-danger mx-2 mb-2">Delete</div>
           <div class="btn btn-primary mx-2 mb-2">Share</div>
-          <div class="btn btn-secondary mx-2 mb-2">Remove</div>
+          <div class="btn btn-secondary mx-2 mb-2" @click="removeNote">Remove</div>
         </div>
       </div>
     </div>
@@ -46,7 +48,7 @@ export default {
     return {
       noteContent: this.content,
       lastSaveContent: this.content,
-      changed: false
+      changed: false,
     };
   },
   props: ["noteID", "title", "content", "show"],
@@ -56,19 +58,36 @@ export default {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         mode: "cors",
-        body: JSON.stringify({ noteID: this.noteID, content: this.noteContent }),
+        body: JSON.stringify({
+          noteID: this.noteID,
+          content: this.noteContent,
+        }),
       });
-      if (res.status == 200){
+      if (res.status == 200) {
         this.lastSaveContent = this.noteContent;
         this.changed = false;
       }
     },
+    async removeNote() {
+      const res = await fetch("http://localhost:8888/api/remove_note", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        mode: "cors",
+        body: JSON.stringify({
+          noteID: this.noteID,
+          username: this.$route.params.username
+        }),
+      });
+      if (res.status == 200){
+        this.$emit('noteListChanged');
+      }
+    },
   },
-  watch:{
-    noteContent: function(){
-        this.changed = this.noteContent != this.lastSaveContent;
-    }
-  }
+  watch: {
+    noteContent: function () {
+      this.changed = this.noteContent != this.lastSaveContent;
+    },
+  },
 };
 </script>
 

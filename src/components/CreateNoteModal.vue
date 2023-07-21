@@ -29,7 +29,7 @@ export default {
     },
     methods:{
         submit(){
-            this.$emit('createNote', this.noteTitle);
+            this.$emit('createdNote', this.noteTitle);
         }
     }
 }
