@@ -8,7 +8,7 @@
     aria-hidden="true"
   >
     <div class="modal-dialog" style="max-width: 80%; margin: 60px auto">
-      <div v-if="!fetchingNote" class="modal-content">
+      <div class="modal-content">
         <div class="modal-header bg-light">
           <h1 class="modal-title fs-5" id="exampleModalLabel">Import Note</h1>
           <button
@@ -18,7 +18,7 @@
             aria-label="Close"
           ></button>
         </div>
-        <div class="modal-body">
+        <div v-if="!fetchingNote" class="modal-body">
           <div class="lead mb-3">Paste the Note's ID</div>
           <input
             class="form-control"
@@ -28,6 +28,7 @@
           />
           <p class="text-danger mt-1">{{ importError }}</p>
         </div>
+        <LoadingSpinner v-if="fetchingNote" class="modal-body" style="max-height: 200px" />
         <div class="modal-footer">
           <button
             ref="closeBtn"
@@ -42,7 +43,6 @@
           </button>
         </div>
       </div>
-      <LoadingSpinner v-if="fetchingNote" class="modal-content" style="max-height: 200px" />
     </div>
   </div>
 </template>
