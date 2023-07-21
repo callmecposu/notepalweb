@@ -104,6 +104,7 @@
             :noteID="note._id"
             :title="note.title"
             :content="note.content"
+            :ownerName="note.ownerName"
             :show="note.show"
             @noteListChanged="refreshNotes"
           />
@@ -113,9 +114,6 @@
       </div>
     </div>
   </section>
-
-  <h1>This is supposed to be a user view</h1>
-  <h2>Welcome, {{ $route.params.username }}</h2>
 </template>
 
 <script>

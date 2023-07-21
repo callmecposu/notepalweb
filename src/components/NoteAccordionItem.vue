@@ -10,7 +10,10 @@
         aria-expanded="true"
         :aria-controls="noteID"
       >
-        {{ title }} {{ changed ? " *" : "" }}
+        <b>{{ title }}</b> {{ changed ? " *" : "" }}
+        <i>{{
+          ownerName == $route.params.username ? "" : `(by ${ownerName})`
+        }}</i>
       </button>
     </h2>
     <div
@@ -21,6 +24,7 @@
       <div class="accordion-body">
         <div class="form">
           <textarea
+            ref="noteTextArea"
             v-model="noteContent"
             class="form-control"
             placeholder="I feel so empty..."
@@ -30,12 +34,23 @@
         </div>
         <!-- note controls -->
         <div class="container mt-2 p-3">
-          <div class="btn btn-outline-success mx-2 mb-2" @click="saveNote">
+          <div
+            v-if="ownerName == $route.params.username"
+            class="btn btn-outline-success mx-2 mb-2"
+            @click="saveNote"
+          >
             Save
           </div>
-          <div class="btn btn-outline-danger mx-2 mb-2">Delete</div>
+          <div
+            v-if="ownerName == $route.params.username"
+            class="btn btn-outline-danger mx-2 mb-2"
+          >
+            Delete
+          </div>
           <div class="btn btn-primary mx-2 mb-2">Share</div>
-          <div class="btn btn-secondary mx-2 mb-2" @click="removeNote">Remove</div>
+          <div class="btn btn-secondary mx-2 mb-2" @click="removeNote">
+            Remove
+          </div>
         </div>
       </div>
     </div>
@@ -51,7 +66,12 @@ export default {
       changed: false,
     };
   },
-  props: ["noteID", "title", "content", "show"],
+  props: ["noteID", "title", "content", "ownerName", "show"],
+  mounted(){
+    if (this.ownerName != this.$route.params.username){
+        this.$refs.noteTextArea.setAttribute('disabled','');
+    }
+  },
   methods: {
     async saveNote() {
       const res = await fetch("http://localhost:8888/api/save_note", {
@@ -75,11 +95,11 @@ export default {
         mode: "cors",
         body: JSON.stringify({
           noteID: this.noteID,
-          username: this.$route.params.username
+          username: this.$route.params.username,
         }),
       });
-      if (res.status == 200){
-        this.$emit('noteListChanged');
+      if (res.status == 200) {
+        this.$emit("noteListChanged");
       }
     },
   },
@@ -97,14 +117,20 @@ export default {
 }
 button.accordion-button {
   background-color: rgb(227, 227, 227);
-  text-indent: 20px;
+  text-indent: 30px;
   transition: background-color 0.1s ease-in-out;
   transition: text-indent 0.1s ease-in-out;
 }
 button.accordion-button.collapsed {
-  text-indent: 0px;
+  text-indent: 10px;
   background-color: whitesmoke;
   transition: background-color 0.1s ease-in-out;
   transition: text-indent 0.1s ease-in-out;
+}
+b {
+  font-weight: 500;
+}
+textarea[disabled]{
+    background-color: white;
 }
 </style>
