@@ -1,6 +1,6 @@
 <template>
   <LoginForm v-if="!loadingUser"/>
-  <LoadingSpinner v-if="loadingUser"/>;
+  <LoadingSpinner v-if="loadingUser"/>
 </template>
 
 <script>
