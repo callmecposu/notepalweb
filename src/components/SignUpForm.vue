@@ -65,7 +65,7 @@ export default {
         this.passwordError = "Password must be at least 8 characters long!";
         return;
       }
-      const res = await fetch("http://localhost:8888/api/create_user", {
+      const res = await fetch(`${process.env.VUE_APP_API_URL}/create_user`, {
         method: "POST",
         mode: "cors",
         headers: { "Content-Type": "application/json" },

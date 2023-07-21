@@ -23,7 +23,7 @@ export default {
     const jwt = this.$cookies.get("jwt");
     if (jwt != null) {
         this.loadingUser = true;
-      const res = await fetch("http://localhost:8888/api/get_user_by_jwt", {
+      const res = await fetch(`${process.env.VUE_APP_API_URL}/get_user_by_jwt`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         mode: "cors",

@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     async submit() {
-      const res = await fetch("http://localhost:8888/api/import_note", {
+      const res = await fetch(`${process.env.VUE_APP_API_URL}/import_note`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         mode: "cors",

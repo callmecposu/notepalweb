@@ -82,7 +82,7 @@ export default {
   },
   methods: {
     async saveNote() {
-      const res = await fetch("http://localhost:8888/api/save_note", {
+      const res = await fetch(`${process.env.VUE_APP_API_URL}/save_note`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         mode: "cors",
@@ -97,7 +97,7 @@ export default {
       }
     },
     async removeNote() {
-      const res = await fetch("http://localhost:8888/api/remove_note", {
+      const res = await fetch(`${process.env.VUE_APP_API_URL}/remove_note`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         mode: "cors",
@@ -114,7 +114,7 @@ export default {
       this.$emit("sharedNote", this.noteID, this.title);
     },
     async deleteNote() {
-      const res = await fetch("http://localhost:8888/api/delete_note", {
+      const res = await fetch(`${process.env.VUE_APP_API_URL}/delete_note`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         mode: "cors",

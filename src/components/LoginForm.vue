@@ -45,7 +45,7 @@ export default {
     async submit() {
       this.usernameError = "";
       this.passwordError = "";
-      const res = await fetch("http://localhost:8888/api/login_user", {
+      const res = await fetch(`${process.env.VUE_APP_API_URL}/login_user`, {
         method: "POST",
         mode: "cors",
         headers: { "Content-Type": "application/json" },

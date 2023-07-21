@@ -190,7 +190,7 @@ export default {
   async mounted() {
     const jwt = this.$cookies.get("jwt");
 
-    const res = await fetch("http://localhost:8888/api/get_user_by_jwt", {
+    const res = await fetch(`${process.env.VUE_APP_API_URL}/get_user_by_jwt`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       mode: "cors",
@@ -211,7 +211,7 @@ export default {
   methods: {
     async addNote(title) {
       this.loadingNotes = true;
-      const res = await fetch("http://localhost:8888/api/create_note", {
+      const res = await fetch(`${process.env.VUE_APP_API_URL}/create_note`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         mode: "cors",
@@ -226,7 +226,7 @@ export default {
     },
     async refreshNotes() {
       this.loadingNotes = true;
-      const res = await fetch("http://localhost:8888/api/get_user_notes", {
+      const res = await fetch(`${process.env.VUE_APP_API_URL}/get_user_notes`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         mode: "cors",
