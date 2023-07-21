@@ -8,7 +8,7 @@
     aria-hidden="true"
   >
     <div class="modal-dialog" style="max-width: 80%; margin: 60px auto">
-      <div class="modal-content">
+      <div v-if="!fetchingNote" class="modal-content">
         <div class="modal-header bg-light">
           <h1 class="modal-title fs-5" id="exampleModalLabel">Import Note</h1>
           <button
@@ -37,23 +37,32 @@
           >
             Close
           </button>
-          <button type="button" class="btn btn-primary" @click="submit">Import</button>
+          <button type="button" class="btn btn-primary" @click="submit">
+            Import
+          </button>
         </div>
       </div>
+      <LoadingSpinner v-if="fetchingNote" class="modal-content" style="max-height: 200px" />
     </div>
   </div>
 </template>
 
 <script>
+import LoadingSpinner from "./LoadingSpinner.vue";
 export default {
   data() {
     return {
       noteID: "",
       importError: "",
+      fetchingNote: false,
     };
+  },
+  components: {
+    LoadingSpinner,
   },
   methods: {
     async submit() {
+      this.fetchingNote = true;
       const res = await fetch(`${process.env.VUE_APP_API_URL}/import_note`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -63,6 +72,7 @@ export default {
           noteID: this.noteID,
         }),
       });
+      this.fetchingNote = false;
       if (res.status != 200) {
         const result = await res.json();
         this.importError = result.message;
