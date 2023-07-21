@@ -47,7 +47,14 @@
           >
             Delete
           </div>
-          <div class="btn btn-primary mx-2 mb-2">Share</div>
+          <div
+            class="btn btn-primary mx-2 mb-2"
+            data-bs-toggle="modal"
+            data-bs-target="#shareNoteModal"
+            @click="shareNote"
+          >
+            Share
+          </div>
           <div class="btn btn-secondary mx-2 mb-2" @click="removeNote">
             Remove
           </div>
@@ -67,9 +74,9 @@ export default {
     };
   },
   props: ["noteID", "title", "content", "ownerName", "show"],
-  mounted(){
-    if (this.ownerName != this.$route.params.username){
-        this.$refs.noteTextArea.setAttribute('disabled','');
+  mounted() {
+    if (this.ownerName != this.$route.params.username) {
+      this.$refs.noteTextArea.setAttribute("disabled", "");
     }
   },
   methods: {
@@ -102,6 +109,9 @@ export default {
         this.$emit("noteListChanged");
       }
     },
+    shareNote(){
+        this.$emit('sharedNote', this.noteID, this.title);
+    }
   },
   watch: {
     noteContent: function () {
@@ -116,14 +126,14 @@ export default {
   width: 80px;
 }
 button.accordion-button {
-    font-size: 65%;
+  font-size: 60%;
   background-color: rgb(227, 227, 227);
   text-indent: 15px;
   transition: background-color 0.1s ease-in-out;
   transition: text-indent 0.1s ease-in-out;
 }
 button.accordion-button.collapsed {
-    font-size: 50%;
+  font-size: 50%;
   text-indent: 5px;
   background-color: whitesmoke;
   transition: background-color 0.1s ease-in-out;
@@ -132,7 +142,7 @@ button.accordion-button.collapsed {
 b {
   font-weight: 500;
 }
-textarea[disabled]{
-    background-color: white;
+textarea[disabled] {
+  background-color: white;
 }
 </style>

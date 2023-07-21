@@ -88,6 +88,51 @@
 
   <CreateNoteModal @createdNote="addNote" />
   <ImportNoteModal @importedNote="refreshNotes" />
+  <!-- Share Note Modal -->
+  <div
+    class="modal fade"
+    id="shareNoteModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" style="max-width: 80%; margin: 60px auto">
+      <div class="modal-content">
+        <div class="modal-header bg-light">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Share Note</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="display-6 mb-3">
+            Below is the ID of note "<b
+              ><u>{{ sharedNoteTitle }}</u></b
+            >".
+          </div>
+          <p class="lead">Feel free to share it!</p>
+          <p ref="noteIDContainer" class="muted">
+            <u
+              ><i>{{ sharedNoteID }}</i></u
+            >
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button
+            ref="closeBtn"
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- notes container -->
   <section id="notes">
@@ -107,10 +152,13 @@
             :ownerName="note.ownerName"
             :show="note.show"
             @noteListChanged="refreshNotes"
+            @sharedNote="shareNote"
           />
         </div>
         <LoadingSpinner v-if="loadingNotes" />
-        <h1 v-if="!loadingNotes && notes.length == 0" class="lead m-3">You have no Notes at the moment.</h1>
+        <h1 v-if="!loadingNotes && notes.length == 0" class="lead m-3">
+          You have no Notes at the moment.
+        </h1>
       </div>
     </div>
   </section>
@@ -135,6 +183,8 @@ export default {
       notes: [],
       userID: "",
       loadingNotes: true,
+      sharedNoteTitle: "",
+      sharedNoteID: "",
     };
   },
   async mounted() {
@@ -192,6 +242,10 @@ export default {
     logout() {
       this.$cookies.set("jwt", "", 1);
       router.push({ name: "home" });
+    },
+    shareNote(noteID, title) {
+      this.sharedNoteID = noteID;
+      this.sharedNoteTitle = title;
     },
   },
 };
