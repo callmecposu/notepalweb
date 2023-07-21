@@ -116,13 +116,15 @@ export default {
   width: 80px;
 }
 button.accordion-button {
+    font-size: 65%;
   background-color: rgb(227, 227, 227);
-  text-indent: 30px;
+  text-indent: 15px;
   transition: background-color 0.1s ease-in-out;
   transition: text-indent 0.1s ease-in-out;
 }
 button.accordion-button.collapsed {
-  text-indent: 10px;
+    font-size: 50%;
+  text-indent: 5px;
   background-color: whitesmoke;
   transition: background-color 0.1s ease-in-out;
   transition: text-indent 0.1s ease-in-out;
