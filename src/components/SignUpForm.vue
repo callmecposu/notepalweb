@@ -1,47 +1,51 @@
 <template>
   <div class="d-flex align-items-center" style="height: 95vh">
     <div class="container col-lg-6 col-10 p-5 rounded-4 border border-3">
-      <div class="lead fw-bold">NotePal</div>
-      <div class="mute mb-3">Get Started with us today!</div>
-      <div class="form-floating mb-3">
-        <input
-          v-model="username"
-          type="text"
-          class="form-control"
-          id="username"
-          placeholder="Username"
-        />
-        <label for="username">Username</label>
+      <div v-if="!fetchingUser">
+        <div class="lead fw-bold">NotePal</div>
+        <div class="mute mb-3">Get Started with us today!</div>
+        <div class="form-floating mb-3">
+          <input
+            v-model="username"
+            type="text"
+            class="form-control"
+            id="username"
+            placeholder="Username"
+          />
+          <label for="username">Username</label>
+        </div>
+        <p class="text-danger mt-1">{{ usernameError }}</p>
+        <div class="form-floating mb-3">
+          <input
+            v-model="password"
+            type="password"
+            class="form-control"
+            id="password"
+            placeholder="Password"
+          />
+          <label for="password">Password</label>
+        </div>
+        <div class="form-floating">
+          <input
+            v-model="confPassword"
+            type="password"
+            class="form-control"
+            id="confPassword"
+            placeholder="Confirm Password"
+          />
+          <label for="confPassword">Confirm Password</label>
+        </div>
+        <p class="text-danger mt-1">{{ passwordError }}</p>
+        <button class="btn btn-success mt-3" @click="submit">Sign Up</button>
       </div>
-      <p class="text-danger mt-1">{{ usernameError }}</p>
-      <div class="form-floating mb-3">
-        <input
-          v-model="password"
-          type="password"
-          class="form-control"
-          id="password"
-          placeholder="Password"
-        />
-        <label for="password">Password</label>
-      </div>
-      <div class="form-floating">
-        <input
-          v-model="confPassword"
-          type="password"
-          class="form-control"
-          id="confPassword"
-          placeholder="Confirm Password"
-        />
-        <label for="confPassword">Confirm Password</label>
-      </div>
-      <p class="text-danger mt-1">{{ passwordError }}</p>
-      <button class="btn btn-success mt-3" @click="submit">Sign Up</button>
+      <LoadingSpinner v-if="fetchingUser" style="max-height: 300px" />
     </div>
   </div>
 </template>
 
 <script>
 import router from "@/router";
+import LoadingSpinner from "./LoadingSpinner.vue";
 export default {
   data() {
     return {
@@ -50,7 +54,11 @@ export default {
       confPassword: "",
       usernameError: "",
       passwordError: "",
+      fetchingUser: false,
     };
+  },
+  components: {
+    LoadingSpinner,
   },
   methods: {
     async submit() {
@@ -65,6 +73,7 @@ export default {
         this.passwordError = "Password must be at least 8 characters long!";
         return;
       }
+      this.fetchingUser = true;
       const res = await fetch(`${process.env.VUE_APP_API_URL}/create_user`, {
         method: "POST",
         mode: "cors",
@@ -75,11 +84,12 @@ export default {
         }),
       });
       const result = await res.json();
+      this.fetchingUser = false;
       console.log(result);
       if (res.status == 200) {
         router.push({
           name: "user",
-          params: { username: this.username},
+          params: { username: this.username },
         });
         this.$cookies.set("jwt", result.token, 3 * 24 * 60 * 60);
       } else {
