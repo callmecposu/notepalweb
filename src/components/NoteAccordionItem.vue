@@ -44,6 +44,7 @@
           <div
             v-if="ownerName == $route.params.username"
             class="btn btn-outline-danger mx-2 mb-2"
+            @click="deleteNote"
           >
             Delete
           </div>
@@ -109,9 +110,22 @@ export default {
         this.$emit("noteListChanged");
       }
     },
-    shareNote(){
-        this.$emit('sharedNote', this.noteID, this.title);
-    }
+    shareNote() {
+      this.$emit("sharedNote", this.noteID, this.title);
+    },
+    async deleteNote() {
+      const res = await fetch("http://localhost:8888/api/delete_note", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        mode: "cors",
+        body: JSON.stringify({
+          noteID: this.noteID,
+        }),
+      });
+      if (res.status == 200){
+        this.$emit('noteListChanged');
+      }
+    },
   },
   watch: {
     noteContent: function () {
